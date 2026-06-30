@@ -1,0 +1,7 @@
+# Для Docker-окружения Amvera этот файл НЕ обязателен: порт по умолчанию
+# равен 80, что нам и нужно (nginx слушает 80). Оставлено как ориентир —
+# при смене порта в nginx.conf поменяй containerPort здесь.
+meta:
+  environment: docker
+run:
+  containerPort: 80
