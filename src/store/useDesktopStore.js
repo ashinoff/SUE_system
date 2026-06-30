@@ -1,23 +1,42 @@
 import { create } from 'zustand'
+import { DEFAULT_WALLPAPER } from '../config/wallpapers.js'
 
-/* Глобальное состояние рабочего стола: открытые окна и уведомления.
-   Менеджер окон: открыть/закрыть/свернуть/сфокусировать/переместить. */
+/* Глобальное состояние рабочего стола: открытые приложения, уведомления,
+   выбранные обои.
 
-let zCounter = 100 // счётчик z-index, чтобы поднимать активное окно наверх
+   Модель окон — как в iOS: приложение всегда раскрыто на весь экран,
+   мини-окон нет. «Свернуть» убирает приложение в док (оно остаётся
+   запущенным), повторный клик по доку или по иконке снова открывает
+   его на весь экран. «Закрыть» завершает приложение. */
+
+const WALLPAPER_KEY = 'platform.wallpaper'
+
+function loadWallpaper() {
+  try {
+    return localStorage.getItem(WALLPAPER_KEY) || DEFAULT_WALLPAPER
+  } catch {
+    return DEFAULT_WALLPAPER
+  }
+}
+
+// Окна лежат поверх дока и панели; счётчик растёт при фокусе, чтобы
+// активное приложение всплывало над остальными.
+let zCounter = 1100
 
 export const useDesktopStore = create((set, get) => ({
-  windows: [],        // [{ id, appId, title, url, x, y, width, height, minimized, z }]
+  windows: [],        // [{ id, appId, title, url, minimized, z }]
   notifications: [],  // [{ id, app, text, read, time }]
+  wallpaper: loadWallpaper(),
 
   openApp: (app) => {
     const existing = get().windows.find((w) => w.appId === app.id)
     if (existing) {
+      // Уже запущено — просто вернуть на весь экран и сфокусировать.
       get().restoreWindow(existing.id)
       get().focusWindow(existing.id)
       return
     }
     zCounter += 1
-    const offset = get().windows.length * 28
     set((s) => ({
       windows: [
         ...s.windows,
@@ -26,12 +45,7 @@ export const useDesktopStore = create((set, get) => ({
           appId: app.id,
           title: app.name,
           url: app.url,
-          x: 80 + offset,
-          y: 24 + offset,
-          width: app.window?.width || 960,
-          height: app.window?.height || 640,
           minimized: false,
-          maximized: false,
           z: zCounter,
         },
       ],
@@ -48,30 +62,27 @@ export const useDesktopStore = create((set, get) => ({
     }))
   },
 
+  // Свернуть в док (приложение остаётся запущенным, просто скрыто).
   minimizeWindow: (id) =>
     set((s) => ({
       windows: s.windows.map((w) => (w.id === id ? { ...w, minimized: true } : w)),
     })),
 
+  // Снова показать на весь экран.
   restoreWindow: (id) =>
     set((s) => ({
       windows: s.windows.map((w) => (w.id === id ? { ...w, minimized: false } : w)),
     })),
 
-  // Развернуть на весь рабочий стол / вернуть исходный размер.
-  // Сохранённые x/y/width/height не трогаем — пока окно развёрнуто,
-  // перетаскивание/ресайз отключены, так что геометрия для возврата цела.
-  toggleMaximize: (id) =>
-    set((s) => ({
-      windows: s.windows.map((w) =>
-        w.id === id ? { ...w, maximized: !w.maximized } : w
-      ),
-    })),
-
-  updateWindow: (id, patch) =>
-    set((s) => ({
-      windows: s.windows.map((w) => (w.id === id ? { ...w, ...patch } : w)),
-    })),
+  // ── Обои рабочего стола ──
+  setWallpaper: (id) => {
+    try {
+      localStorage.setItem(WALLPAPER_KEY, id)
+    } catch {
+      /* приватный режим / недоступный localStorage — просто не сохраняем */
+    }
+    set({ wallpaper: id })
+  },
 
   // ── Уведомления ──
   pushNotification: (n) =>

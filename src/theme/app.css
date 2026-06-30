@@ -175,58 +175,49 @@ code {
 .dock__item--active { box-shadow: inset 0 -3px 0 var(--brand); }
 .dock:empty { display: none; }
 
-/* ─ Окно приложения ──────────────────────────────────────────── */
-.window { z-index: var(--z-window); }
-.window__chrome {
-  height: 100%;
+/* ─ Окно приложения: всегда на весь экран (модель iOS) ──────────── */
+.app-window {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-window);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   background: var(--surface);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-window);
 }
-.window__bar {
+.app-window__bar {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  padding: 0 var(--space-2) 0 var(--space-4);
+  height: 38px;
+  padding: 0 var(--space-3);
   background: var(--surface-2);
   border-bottom: 1px solid var(--border);
-  cursor: move;
   user-select: none;
 }
-/* «На весь экран»: окно выходит за пределы рабочей области и кроет
-   весь вьюпорт поверх дока и панели. !important — чтобы перебить
-   инлайн-стили react-rnd (position/transform/width/height). */
-.window--max {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  transform: none !important;
-  z-index: var(--z-maximized) !important;
+.app-window__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
 }
-.window--max .window__chrome {
-  border-radius: 0;
+.app-window__spacer { flex: 1; }
+.app-window__body { flex: 1; overflow: hidden; }
+
+/* «Светофор» в стиле macOS: закрыть / свернуть / на весь монитор */
+.traffic { display: flex; align-items: center; gap: var(--space-2); }
+.traffic__dot {
+  width: 13px; height: 13px;
+  padding: 0;
   border: none;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
 }
-.window__title { font-size: 13px; font-weight: 500; color: var(--text); }
-.window__actions { display: flex; gap: 2px; }
-.window__btn {
-  width: 28px; height: 28px;
-  display: grid;
-  place-items: center;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
-}
-.window__btn:hover { background: var(--border); color: var(--text); }
-.window__btn--close:hover { background: var(--danger); color: #fff; }
-.window__body { flex: 1; overflow: hidden; }
+.traffic__dot--close { background: var(--danger); }
+.traffic__dot--min   { background: var(--warning); }
+.traffic__dot--full  { background: var(--success); }
+.traffic__dot:hover  { filter: brightness(0.9); }
 
 /* ─ iframe приложения ────────────────────────────────────────── */
 .app-frame { width: 100%; height: 100%; border: none; background: #fff; }
@@ -286,6 +277,34 @@ code {
 .notif__app { font-size: 11px; color: var(--brand); font-weight: 500; }
 .notif__text { font-size: 13px; }
 .notif__test { margin: var(--space-3); width: calc(100% - 2 * var(--space-3)); }
+
+/* ─ Меню обоев ───────────────────────────────────────────────── */
+.wall { position: relative; }
+.wall__panel {
+  position: absolute;
+  top: 40px; right: 0;
+  width: 260px;
+  z-index: var(--z-popover);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+  padding: var(--space-3);
+}
+.wall__head { margin-bottom: var(--space-3); }
+.wall__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+.wall__swatch {
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+}
+.wall__swatch:hover { border-color: var(--border-strong); }
+.wall__swatch--active { border-color: var(--brand); }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }

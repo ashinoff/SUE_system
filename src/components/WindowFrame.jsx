@@ -1,80 +1,60 @@
-import { Rnd } from 'react-rnd'
-import { X, Minus, Maximize2, Minimize2 } from 'lucide-react'
+import { useRef } from 'react'
 import { useDesktopStore } from '../store/useDesktopStore.js'
 import AppFrame from './AppFrame.jsx'
 
+/* Окно приложения раскрыто на весь экран (модель iOS — мини-окон нет).
+   Управление — три «кружка» в стиле macOS:
+     🔴 закрыть   — завершить приложение
+     🟡 свернуть  — убрать в док (приложение остаётся запущенным)
+     🟢 на монитор — настоящий полный экран браузера (Fullscreen API) */
 export default function WindowFrame({ win }) {
   const closeWindow = useDesktopStore((s) => s.closeWindow)
   const minimizeWindow = useDesktopStore((s) => s.minimizeWindow)
-  const toggleMaximize = useDesktopStore((s) => s.toggleMaximize)
   const focusWindow = useDesktopStore((s) => s.focusWindow)
-  const updateWindow = useDesktopStore((s) => s.updateWindow)
+  const ref = useRef(null)
 
   if (win.minimized) return null
 
-  const maximized = win.maximized
+  const toggleFullscreen = () => {
+    const el = ref.current
+    if (!document.fullscreenElement) el?.requestFullscreen?.()
+    else document.exitFullscreen?.()
+  }
 
   return (
-    <Rnd
-      className={`window${maximized ? ' window--max' : ''}`}
+    <div
+      ref={ref}
+      className="app-window"
       style={{ zIndex: win.z }}
-      size={
-        maximized
-          ? { width: '100%', height: '100%' }
-          : { width: win.width, height: win.height }
-      }
-      position={maximized ? { x: 0, y: 0 } : { x: win.x, y: win.y }}
-      minWidth={360}
-      minHeight={240}
-      bounds="parent"
-      dragHandleClassName="window__bar"
-      disableDragging={maximized}
-      enableResizing={!maximized}
       onMouseDown={() => focusWindow(win.id)}
-      onDragStop={(e, d) => updateWindow(win.id, { x: d.x, y: d.y })}
-      onResizeStop={(e, dir, ref, delta, pos) =>
-        updateWindow(win.id, {
-          width: ref.offsetWidth,
-          height: ref.offsetHeight,
-          x: pos.x,
-          y: pos.y,
-        })
-      }
     >
-      <div className="window__chrome">
-        <div
-          className="window__bar"
-          onDoubleClick={() => toggleMaximize(win.id)}
-        >
-          <span className="window__title">{win.title}</span>
-          <div className="window__actions">
-            <button
-              className="window__btn"
-              onClick={() => minimizeWindow(win.id)}
-              title="Свернуть"
-            >
-              <Minus size={14} />
-            </button>
-            <button
-              className="window__btn"
-              onClick={() => toggleMaximize(win.id)}
-              title={maximized ? 'Вернуть в исходный размер' : 'На весь экран'}
-            >
-              {maximized ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
-            </button>
-            <button
-              className="window__btn window__btn--close"
-              onClick={() => closeWindow(win.id)}
-              title="Закрыть"
-            >
-              <X size={14} />
-            </button>
-          </div>
+      <div className="app-window__bar">
+        <div className="traffic">
+          <button
+            className="traffic__dot traffic__dot--close"
+            onClick={() => closeWindow(win.id)}
+            title="Закрыть"
+            aria-label="Закрыть"
+          />
+          <button
+            className="traffic__dot traffic__dot--min"
+            onClick={() => minimizeWindow(win.id)}
+            title="Свернуть в док"
+            aria-label="Свернуть в док"
+          />
+          <button
+            className="traffic__dot traffic__dot--full"
+            onClick={toggleFullscreen}
+            title="На весь монитор"
+            aria-label="На весь монитор"
+          />
         </div>
-        <div className="window__body">
-          <AppFrame win={win} />
-        </div>
+        <span className="app-window__title">{win.title}</span>
+        <span className="app-window__spacer" />
       </div>
-    </Rnd>
+      <div className="app-window__body">
+        <AppFrame win={win} />
+      </div>
+    </div>
   )
 }

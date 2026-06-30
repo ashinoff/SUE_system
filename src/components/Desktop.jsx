@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useAuth } from '../auth/useAuth.js'
 import { appsForRoles } from '../config/apps.js'
+import { WALLPAPERS, DEFAULT_WALLPAPER } from '../config/wallpapers.js'
 import { useDesktopStore } from '../store/useDesktopStore.js'
 import TopBar from './TopBar.jsx'
 import Dock from './Dock.jsx'
@@ -10,6 +12,15 @@ export default function Desktop() {
   const apps = appsForRoles(user?.roles)
   const windows = useDesktopStore((s) => s.windows)
   const openApp = useDesktopStore((s) => s.openApp)
+  const wallpaper = useDesktopStore((s) => s.wallpaper)
+
+  // Применяем выбранные обои к токену --wallpaper (фон стола, входа, boot).
+  useEffect(() => {
+    const wp =
+      WALLPAPERS.find((w) => w.id === wallpaper) ||
+      WALLPAPERS.find((w) => w.id === DEFAULT_WALLPAPER)
+    if (wp) document.documentElement.style.setProperty('--wallpaper', wp.value)
+  }, [wallpaper])
 
   return (
     <div className="desktop">
