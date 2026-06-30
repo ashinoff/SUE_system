@@ -31,6 +31,7 @@ export const useDesktopStore = create((set, get) => ({
           width: app.window?.width || 960,
           height: app.window?.height || 640,
           minimized: false,
+          maximized: false,
           z: zCounter,
         },
       ],
@@ -55,6 +56,16 @@ export const useDesktopStore = create((set, get) => ({
   restoreWindow: (id) =>
     set((s) => ({
       windows: s.windows.map((w) => (w.id === id ? { ...w, minimized: false } : w)),
+    })),
+
+  // Развернуть на весь рабочий стол / вернуть исходный размер.
+  // Сохранённые x/y/width/height не трогаем — пока окно развёрнуто,
+  // перетаскивание/ресайз отключены, так что геометрия для возврата цела.
+  toggleMaximize: (id) =>
+    set((s) => ({
+      windows: s.windows.map((w) =>
+        w.id === id ? { ...w, maximized: !w.maximized } : w
+      ),
     })),
 
   updateWindow: (id, patch) =>

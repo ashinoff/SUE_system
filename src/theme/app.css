@@ -198,6 +198,10 @@ code {
   cursor: move;
   user-select: none;
 }
+.window--max .window__chrome {
+  border-radius: 0;
+  border: none;
+}
 .window__title { font-size: 13px; font-weight: 500; color: var(--text); }
 .window__actions { display: flex; gap: 2px; }
 .window__btn {
