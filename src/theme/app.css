@@ -198,6 +198,17 @@ code {
   cursor: move;
   user-select: none;
 }
+/* «На весь экран»: окно выходит за пределы рабочей области и кроет
+   весь вьюпорт поверх дока и панели. !important — чтобы перебить
+   инлайн-стили react-rnd (position/transform/width/height). */
+.window--max {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  transform: none !important;
+  z-index: var(--z-maximized) !important;
+}
 .window--max .window__chrome {
   border-radius: 0;
   border: none;
