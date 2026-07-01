@@ -20,7 +20,7 @@ export const APPS = [
     name: 'СИЗ-контроль',
     icon: ShieldCheck,
     url: import.meta.env.VITE_APP_SIZ_URL || 'about:blank',
-    roles: ['siz_user', 'admin'],
+    roles: ['siz-user', 'admin'],
     window: { width: 1100, height: 720 },
   },
   {
