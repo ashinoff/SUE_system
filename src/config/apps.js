@@ -19,7 +19,7 @@ export const APPS = [
     id: 'siz',
     name: 'СИЗ-контроль',
     icon: ShieldCheck,
-    url: import.meta.env.VITE_APP_SIZ_URL || 'about:blank',
+    url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
     roles: ['siz-user', 'admin'],
     window: { width: 1100, height: 720 },
   },
