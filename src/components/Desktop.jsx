@@ -6,6 +6,7 @@ import { useDesktopStore } from '../store/useDesktopStore.js'
 import TopBar from './TopBar.jsx'
 import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
+import AppIcon from './AppIcon.jsx'
 
 export default function Desktop() {
   const { user } = useAuth()
@@ -29,7 +30,6 @@ export default function Desktop() {
       <main className="desktop__surface">
         <div className="icon-grid">
           {apps.map((app) => {
-            const Icon = app.icon
             return (
               <button
                 key={app.id}
@@ -38,7 +38,7 @@ export default function Desktop() {
                 title={`Открыть «${app.name}»`}
               >
                 <span className="app-icon__badge">
-                  <Icon size={28} />
+                  <AppIcon app={app} size={28} />
                 </span>
                 <span className="app-icon__label">{app.name}</span>
               </button>

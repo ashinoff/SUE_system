@@ -6,7 +6,11 @@ import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
    ────────────────────────────────────────────────────────────────
    id     — уникальный идентификатор
    name   — подпись под иконкой и заголовок окна
-   icon   — компонент иконки из lucide-react (https://lucide.dev/icons)
+   icon   — компонент иконки из lucide-react (https://lucide.dev/icons).
+            Используется как запасной вариант, если нет/не загрузился iconUrl.
+   iconUrl— (необязательно) путь к картинке-ярлычку в public/apps/,
+            напр. '/apps/siz.png'. Если задан — показывается вместо lucide-иконки;
+            если файла нет — мягкий откат на icon.
    url    — адрес приложения (откроется в окне через iframe)
    roles  — какие роли видят иконку. Пустой массив = видно всем.
             ВАЖНО: это фильтр ТОЛЬКО для интерфейса. Настоящую проверку
@@ -19,6 +23,7 @@ export const APPS = [
     id: 'siz',
     name: 'СИЗ-контроль',
     icon: ShieldCheck,
+    iconUrl: '/apps/siz.png',
     url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
     roles: ['siz-user', 'admin'],
     window: { width: 1100, height: 720 },
@@ -27,6 +32,7 @@ export const APPS = [
     id: 'sklad',
     name: 'Склад',
     icon: Boxes,
+    iconUrl: '/apps/sklad.png',
     url: 'about:blank',
     roles: [],
     window: { width: 960, height: 640 },
@@ -35,6 +41,7 @@ export const APPS = [
     id: 'reports',
     name: 'Отчёты',
     icon: BarChart3,
+    iconUrl: '/apps/reports.png',
     url: 'about:blank',
     roles: ['admin'],
     window: { width: 960, height: 640 },
@@ -43,6 +50,7 @@ export const APPS = [
     id: 'svet',
     name: 'Светлячок',
     icon: Zap,
+    iconUrl: '/apps/svet.png',
     url: import.meta.env.VITE_APP_SVET_URL || 'https://uchet-pu-amvera-ashinoff.amvera.io',
     roles: ['svet-user', 'admin'],
     window: { width: 1200, height: 760 },

@@ -1,4 +1,5 @@
 import { useDesktopStore } from '../store/useDesktopStore.js'
+import AppIcon from './AppIcon.jsx'
 
 export default function Dock({ apps }) {
   const windows = useDesktopStore((s) => s.windows)
@@ -9,7 +10,6 @@ export default function Dock({ apps }) {
   return (
     <nav className="dock">
       {apps.map((app) => {
-        const Icon = app.icon
         const win = windows.find((w) => w.appId === app.id)
         return (
           <button
@@ -25,7 +25,7 @@ export default function Dock({ apps }) {
               }
             }}
           >
-            <Icon size={24} />
+            <AppIcon app={app} size={24} />
           </button>
         )
       })}
