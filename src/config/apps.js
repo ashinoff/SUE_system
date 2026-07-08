@@ -1,4 +1,4 @@
-import { ShieldCheck, Boxes, BarChart3 } from 'lucide-react'
+import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -38,6 +38,14 @@ export const APPS = [
     url: 'about:blank',
     roles: ['admin'],
     window: { width: 960, height: 640 },
+  },
+  {
+    id: 'svet',
+    name: 'Светлячок',
+    icon: Zap,
+    url: import.meta.env.VITE_APP_SVET_URL || 'https://uchet-pu-amvera-ashinoff.amvera.io',
+    roles: ['svet-user', 'admin'],
+    window: { width: 1200, height: 760 },
   },
 ]
 
