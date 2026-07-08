@@ -9,14 +9,13 @@ export default function AppIcon({ app, size = 28 }) {
   const Fallback = app.icon
 
   if (app.iconUrl && !imgFailed) {
+    // Картинка заполняет всю плитку (размеры/скругление — из CSS .app-icon__img).
     return (
       <img
+        className="app-icon__img"
         src={app.iconUrl}
-        width={size}
-        height={size}
         alt=""
         onError={() => setImgFailed(true)}
-        style={{ objectFit: 'contain', display: 'block' }}
       />
     )
   }

@@ -147,6 +147,14 @@ code {
   box-shadow: var(--shadow-panel);
 }
 .app-icon__label { font-size: 12px; text-align: center; line-height: 1.2; }
+/* Картинка-ярлычок заполняет всю плитку (и на столе, и в доке) */
+.app-icon__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
 
 /* ─ Док ──────────────────────────────────────────────────────── */
 .dock {
