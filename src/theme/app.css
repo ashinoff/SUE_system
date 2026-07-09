@@ -152,8 +152,15 @@ code {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  border-radius: 22%;
   display: block;
+}
+/* Для картинок убираем белую подложку-плитку и тень — иконка сама и есть плитка,
+   а за её скруглёнными углами виден фон рабочего стола, а не белое поле. */
+.app-icon__badge:has(.app-icon__img),
+.dock__item:has(.app-icon__img) {
+  background: transparent;
+  box-shadow: none;
 }
 
 /* ─ Док ──────────────────────────────────────────────────────── */
