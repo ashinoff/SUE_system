@@ -178,6 +178,8 @@ code {
 }
 .dock__item {
   width: 44px; height: 44px;
+  flex: 0 0 auto;      /* не сжиматься по ширине — всегда квадрат, как оригинал */
+  aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
   border: none;
