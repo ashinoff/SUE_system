@@ -16,6 +16,9 @@ import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
             ВАЖНО: это фильтр ТОЛЬКО для интерфейса. Настоящую проверку
             прав обязано делать само приложение на своём бэкенде —
             клиенту верить нельзя.
+   badge  — есть ли у приложения бэкенд с эндпоинтом /api/platform/badge
+            (счётчик уведомлений). true — платформа опрашивает его и рисует
+            красный кружок на иконке; false — приложение-заглушка без API.
    window — размер окна по умолчанию
    ════════════════════════════════════════════════════════════════ */
 export const APPS = [
@@ -26,6 +29,7 @@ export const APPS = [
     iconUrl: '/apps/siz.png',
     url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
     roles: ['siz-user', 'admin'],
+    badge: true,
     window: { width: 1100, height: 720 },
   },
   {
@@ -35,6 +39,7 @@ export const APPS = [
     iconUrl: '/apps/sklad.png',
     url: 'about:blank',
     roles: [],
+    badge: false,
     window: { width: 960, height: 640 },
   },
   {
@@ -44,6 +49,7 @@ export const APPS = [
     iconUrl: '/apps/reports.png',
     url: 'about:blank',
     roles: ['admin'],
+    badge: false,
     window: { width: 960, height: 640 },
   },
   {
@@ -53,6 +59,7 @@ export const APPS = [
     iconUrl: '/apps/svet.png',
     url: import.meta.env.VITE_APP_SVET_URL || 'https://uchet-pu-amvera-ashinoff.amvera.io',
     roles: ['svet-user', 'admin'],
+    badge: true,
     window: { width: 1200, height: 760 },
   },
 ]

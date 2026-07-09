@@ -138,6 +138,7 @@ code {
 .app-icon:hover { background: rgba(255, 255, 255, 0.10); }
 .app-icon:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .app-icon__badge {
+  position: relative;               /* якорь для бейджа уведомлений */
   width: var(--icon-size); height: var(--icon-size);
   display: grid;
   place-items: center;
@@ -145,6 +146,28 @@ code {
   color: var(--brand);
   border-radius: var(--radius);
   box-shadow: var(--shadow-panel);
+}
+/* Бейдж уведомлений (красный кружок с числом) в правом верхнем углу иконки. */
+.app-icon__notif {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff3b30;              /* iOS-красный */
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 10px;
+  border: 2px solid #fff;          /* белая обводка-халообразно, как бейджи iOS */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  pointer-events: none;            /* не мешать клику/выделению иконки */
 }
 .app-icon__label { font-size: 12px; text-align: center; line-height: 1.2; }
 /* Картинка-ярлычок заполняет плитку и ВСЕГДА квадратная (и на столе, и в доке).

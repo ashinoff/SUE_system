@@ -3,6 +3,7 @@ import { useAuth } from '../auth/useAuth.js'
 import { appsForRoles } from '../config/apps.js'
 import { WALLPAPERS, DEFAULT_WALLPAPER } from '../config/wallpapers.js'
 import { useDesktopStore } from '../store/useDesktopStore.js'
+import { useAppBadges } from '../hooks/useAppBadges.js'
 import TopBar from './TopBar.jsx'
 import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
@@ -11,6 +12,7 @@ import AppIcon from './AppIcon.jsx'
 export default function Desktop() {
   const { user } = useAuth()
   const apps = appsForRoles(user?.roles)
+  const badges = useAppBadges()
   const windows = useDesktopStore((s) => s.windows)
   const openApp = useDesktopStore((s) => s.openApp)
   const wallpaper = useDesktopStore((s) => s.wallpaper)
@@ -30,6 +32,7 @@ export default function Desktop() {
       <main className="desktop__surface">
         <div className="icon-grid">
           {apps.map((app) => {
+            const count = badges[app.id] || 0
             return (
               <button
                 key={app.id}
@@ -39,6 +42,11 @@ export default function Desktop() {
               >
                 <span className="app-icon__badge">
                   <AppIcon app={app} size={28} />
+                  {count > 0 && (
+                    <span className="app-icon__notif" aria-label={`Уведомлений: ${count}`}>
+                      {count > 99 ? '99+' : count}
+                    </span>
+                  )}
                 </span>
                 <span className="app-icon__label">{app.name}</span>
               </button>
