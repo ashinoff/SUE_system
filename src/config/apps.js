@@ -1,4 +1,5 @@
 import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
+import { SvetTile, SizTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -7,10 +8,11 @@ import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
    id     — уникальный идентификатор
    name   — подпись под иконкой и заголовок окна
    icon   — компонент иконки из lucide-react (https://lucide.dev/icons).
-            Используется как запасной вариант, если нет/не загрузился iconUrl.
-   iconUrl— (необязательно) путь к картинке-ярлычку в public/apps/,
-            напр. '/apps/siz.png'. Если задан — показывается вместо lucide-иконки;
-            если файла нет — мягкий откат на icon.
+            Запасной вариант, если нет iconSvg/iconUrl.
+   iconSvg— (рекомендуется) инлайн-SVG плитка приложения из ./appIcons.jsx
+            (без картинок — вектор, заполняет всю плитку). В приоритете.
+   iconUrl— (легаси, необязательно) путь к картинке в public/apps/. Если задан
+            и нет iconSvg — показывается картинка; при ошибке — откат на icon.
    url    — адрес приложения (откроется в окне через iframe)
    roles  — какие роли видят иконку. Пустой массив = видно всем.
             ВАЖНО: это фильтр ТОЛЬКО для интерфейса. Настоящую проверку
@@ -26,7 +28,7 @@ export const APPS = [
     id: 'siz',
     name: 'СИЗ-контроль',
     icon: ShieldCheck,
-    iconUrl: '/apps/siz.png',
+    iconSvg: SizTile,
     url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
     roles: ['siz-user', 'admin'],
     badge: true,
@@ -56,7 +58,7 @@ export const APPS = [
     id: 'svet',
     name: 'Светлячок',
     icon: Zap,
-    iconUrl: '/apps/svet.png',
+    iconSvg: SvetTile,
     url: import.meta.env.VITE_APP_SVET_URL || 'https://uchet-pu-amvera-ashinoff.amvera.io',
     roles: ['svet-user', 'admin'],
     badge: true,

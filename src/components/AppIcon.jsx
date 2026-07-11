@@ -8,6 +8,12 @@ export default function AppIcon({ app, size = 28 }) {
   const [imgFailed, setImgFailed] = useState(false)
   const Fallback = app.icon
 
+  // Инлайн-SVG плитка приложения (без картинок) — в приоритете.
+  if (app.iconSvg) {
+    const Tile = app.iconSvg
+    return <Tile className="app-icon__img" />
+  }
+
   if (app.iconUrl && !imgFailed) {
     // Картинка заполняет всю плитку (размеры/скругление — из CSS .app-icon__img).
     return (
