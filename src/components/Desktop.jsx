@@ -8,6 +8,7 @@ import TopBar from './TopBar.jsx'
 import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
 import AppIcon from './AppIcon.jsx'
+import CalendarWidget from './CalendarWidget.jsx'
 
 export default function Desktop() {
   const { user } = useAuth()
@@ -30,6 +31,7 @@ export default function Desktop() {
       <TopBar />
 
       <main className="desktop__surface">
+        <CalendarWidget />
         <div className="icon-grid">
           {apps.map((app) => {
             const count = badges[app.id] || 0

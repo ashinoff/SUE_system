@@ -1,7 +1,6 @@
 import { LogOut } from 'lucide-react'
 import { useAuth } from '../auth/useAuth.js'
 import Clock from './Clock.jsx'
-import CalendarWidget from './CalendarWidget.jsx'
 import WallpaperMenu from './WallpaperMenu.jsx'
 import NotificationCenter from './NotificationCenter.jsx'
 
@@ -14,7 +13,6 @@ export default function TopBar() {
       </div>
       <div className="topbar__right">
         <Clock />
-        <CalendarWidget />
         <WallpaperMenu />
         <NotificationCenter />
         <div className="topbar__user">
