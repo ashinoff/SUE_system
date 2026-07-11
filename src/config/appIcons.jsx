@@ -22,6 +22,25 @@ export function SvetTile(props) {
   )
 }
 
+// «РЭС-менеджмент» (контроль уровня напряжения) — зелёно-бирюзовый градиент,
+// белая «пульс»-линия (мониторинг напряжения).
+export function ResmTile(props) {
+  return (
+    <svg viewBox="0 0 512 512" {...props}>
+      <defs>
+        <linearGradient id="resmGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#22c55e" />
+          <stop offset="1" stopColor="#0e7490" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#resmGrad)" />
+      <g transform="translate(88 88) scale(14)" fill="none" stroke="#fff" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+      </g>
+    </svg>
+  )
+}
+
 // «СИЗ-контроль» — красная плитка, белый щит с галочкой.
 export function SizTile(props) {
   return (

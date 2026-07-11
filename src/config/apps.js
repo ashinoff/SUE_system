@@ -1,5 +1,5 @@
 import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
-import { SvetTile, SizTile } from './appIcons.jsx'
+import { SvetTile, SizTile, ResmTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -61,6 +61,16 @@ export const APPS = [
     iconSvg: SvetTile,
     url: import.meta.env.VITE_APP_SVET_URL || 'https://uchet-pu-amvera-ashinoff.amvera.io',
     roles: ['svet-user', 'admin'],
+    badge: true,
+    window: { width: 1200, height: 760 },
+  },
+  {
+    id: 'resm',
+    name: 'РЭС-менеджмент',
+    icon: BarChart3,
+    iconSvg: ResmTile,
+    url: import.meta.env.VITE_APP_RESM_URL || 'https://res-management-amvera-ashinoff.amvera.io',
+    roles: ['resm-user', 'admin'],
     badge: true,
     window: { width: 1200, height: 760 },
   },
