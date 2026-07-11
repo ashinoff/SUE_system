@@ -171,42 +171,50 @@ code {
 }
 .app-icon__label { font-size: 13px; text-align: center; line-height: 1.2; }
 
-/* ─ Календарь-виджет на рабочем столе (справа сверху, всегда развёрнут) ─ */
+/* ─ Календарь-виджет на рабочем столе — «встроен» в обои темы ─
+   Фон прозрачный (обои просвечивают и меняются вместе с темой), а цифры —
+   с обратным контрастом (mix-blend-mode: difference): на светлых участках
+   тёмные, на тёмных — светлые, везде читаемы. Без z-index — иначе смешивание
+   считалось бы не с обоями, а с пустым фоном самого виджета. */
 .deskcal {
   position: absolute;
   top: var(--space-5);
   right: var(--space-5);
-  z-index: var(--z-desktop);
   width: 520px; max-width: calc(100vw - 40px);
-  padding: 18px 20px;
-  background: var(--surface); color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-panel);
+  padding: 8px 12px;
+  background: transparent;
 }
 .deskcal__head {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.deskcal__title { font-weight: 650; font-size: 20px; letter-spacing: -0.01em; }
+.deskcal__title {
+  font-weight: 700; font-size: 20px; letter-spacing: -0.01em;
+  color: #fff; mix-blend-mode: difference;
+}
 .deskcal__nav {
   width: 36px; height: 36px; border: none; cursor: pointer;
-  background: transparent; color: var(--text-muted);
-  border-radius: var(--radius-sm); font-size: 24px; line-height: 1;
+  background: transparent; font-size: 26px; line-height: 1;
+  color: #fff; mix-blend-mode: difference;
+  transition: transform .12s;
 }
-.deskcal__nav:hover { background: var(--surface-2); color: var(--text); }
+.deskcal__nav:hover { transform: scale(1.2); }
 .deskcal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
 .deskcal__wd {
-  text-align: center; font-size: 13px; font-weight: 600;
-  color: var(--text-muted); padding: 6px 0;
+  text-align: center; font-size: 13px; font-weight: 700; padding: 6px 0;
+  color: #fff; mix-blend-mode: difference;
 }
 .deskcal__day {
   display: flex; align-items: center; justify-content: center;
-  height: 52px; font-size: 17px; color: var(--text);
-  border-radius: var(--radius-sm);
+  height: 52px; font-size: 18px; font-weight: 600;
+  color: #fff; mix-blend-mode: difference;
 }
-.deskcal__day:not(.deskcal__day--empty):hover { background: var(--surface-2); }
-.deskcal__day--today { background: var(--brand); color: var(--brand-contrast); font-weight: 700; }
+/* Сегодня — сплошная акцентная плитка (без инверсии), чтобы явно выделялся. */
+.deskcal__day--today {
+  mix-blend-mode: normal;
+  background: var(--brand); color: var(--brand-contrast);
+  border-radius: var(--radius-sm); font-weight: 800;
+}
 .deskcal__day--empty { visibility: hidden; }
 /* Картинка-ярлычок заполняет плитку и ВСЕГДА квадратная (и на столе, и в доке).
    aspect-ratio держит квадрат, даже если кнопка-контейнер оказалась
