@@ -1,5 +1,5 @@
-import { ShieldCheck, BarChart3, Zap } from 'lucide-react'
-import { SvetTile, SizTile, ResmTile } from './appIcons.jsx'
+import { ShieldCheck, BarChart3, Zap, Activity } from 'lucide-react'
+import { SvetTile, SizTile, ResmTile, AnomalyTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -63,6 +63,20 @@ export const APPS = [
     roles: ['resm-user', 'admin'],
     badge: true,
     window: { width: 1200, height: 760 },
+  },
+  {
+    // Streamlit-инструмент анализа аномального потребления. Своей авторизации
+    // и бэкенда нет — роль гейтит только показ иконки на рабочем столе, сам
+    // URL открыт (инструмент stateless, данные не сохраняются). ?embed=true —
+    // штатный режим встраивания Streamlit (прячет своё меню/футер в iframe).
+    id: 'anomaly',
+    name: 'Анализ потребления',
+    icon: Activity,
+    iconSvg: AnomalyTile,
+    url: import.meta.env.VITE_APP_ANOMALY_URL || 'https://energy-audit-ashinoff.amvera.io/?embed=true',
+    roles: ['anomaly-user', 'admin'],
+    badge: false,
+    window: { width: 1280, height: 800 },
   },
 ]
 

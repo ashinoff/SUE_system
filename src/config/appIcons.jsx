@@ -41,6 +41,27 @@ export function ResmTile(props) {
   )
 }
 
+// «Анализ потребления» (энергоаудит) — индиго-градиент, белая лупа над
+// ломаной линией потребления (поиск аномалий).
+export function AnomalyTile(props) {
+  return (
+    <svg viewBox="0 0 512 512" {...props}>
+      <defs>
+        <linearGradient id="anomalyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#6366f1" />
+          <stop offset="1" stopColor="#4338ca" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#anomalyGrad)" />
+      <g transform="translate(88 88) scale(14)" fill="none" stroke="#fff" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 17l4-5 3 3 4-7" />
+        <circle cx="17" cy="9" r="3.4" />
+        <line x1="19.6" y1="11.6" x2="22" y2="14" />
+      </g>
+    </svg>
+  )
+}
+
 // «СИЗ-контроль» — красная плитка, белый щит с галочкой.
 export function SizTile(props) {
   return (
