@@ -1,4 +1,4 @@
-import { ShieldCheck, Boxes, BarChart3, Zap } from 'lucide-react'
+import { ShieldCheck, BarChart3, Zap } from 'lucide-react'
 import { SvetTile, SizTile, ResmTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
@@ -26,23 +26,13 @@ import { SvetTile, SizTile, ResmTile } from './appIcons.jsx'
 export const APPS = [
   {
     id: 'siz',
-    name: 'СИЗ-контроль',
+    name: 'СИЗ',
     icon: ShieldCheck,
     iconSvg: SizTile,
     url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
     roles: ['siz-user', 'admin'],
     badge: true,
     window: { width: 1100, height: 720 },
-  },
-  {
-    id: 'sklad',
-    name: 'Склад',
-    icon: Boxes,
-    iconUrl: '/apps/sklad.png',
-    url: 'about:blank',
-    roles: [],
-    badge: false,
-    window: { width: 960, height: 640 },
   },
   {
     id: 'reports',
@@ -66,7 +56,7 @@ export const APPS = [
   },
   {
     id: 'resm',
-    name: 'РЭС-менеджмент',
+    name: 'Мониторинг напряжения',
     icon: BarChart3,
     iconSvg: ResmTile,
     url: import.meta.env.VITE_APP_RESM_URL || 'https://res-management-ashinoff.amvera.io',
