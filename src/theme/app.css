@@ -298,7 +298,7 @@ code {
 /* «Светофор» в стиле macOS: закрыть / свернуть / на весь монитор */
 .traffic { display: flex; align-items: center; gap: var(--space-2); }
 .traffic__dot {
-  width: 13px; height: 13px;
+  width: 19.5px; height: 19.5px;
   padding: 0;
   border: none;
   border-radius: var(--radius-pill);
