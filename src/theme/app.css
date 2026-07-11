@@ -120,7 +120,7 @@ code {
   top: var(--space-5);
   left: var(--space-5);
   display: grid;
-  grid-template-columns: repeat(auto-fill, 88px);
+  grid-template-columns: repeat(auto-fill, 112px);
   gap: var(--space-4);
 }
 .app-icon {
@@ -128,7 +128,7 @@ code {
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
-  width: 88px;
+  width: 112px;
   padding: var(--space-2);
   border: none;
   background: transparent;
@@ -169,7 +169,49 @@ code {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   pointer-events: none;            /* не мешать клику/выделению иконки */
 }
-.app-icon__label { font-size: 12px; text-align: center; line-height: 1.2; }
+.app-icon__label { font-size: 13px; text-align: center; line-height: 1.2; }
+
+/* ─ Календарь в верхней панели ─────────────────────────────────── */
+.cal { position: relative; display: inline-flex; }
+.cal__btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 10px; border: none; cursor: pointer;
+  background: rgba(255, 255, 255, 0.08); color: var(--text-on-dark);
+  border-radius: var(--radius-pill); font-size: 13px;
+}
+.cal__btn:hover { background: rgba(255, 255, 255, 0.16); }
+.cal__pop {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  z-index: var(--z-popover);
+  width: 268px; padding: 12px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+}
+.cal__head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cal__title { font-weight: 650; font-size: 14px; letter-spacing: -0.01em; }
+.cal__nav {
+  width: 26px; height: 26px; border: none; cursor: pointer;
+  background: transparent; color: var(--text-muted);
+  border-radius: var(--radius-sm); font-size: 18px; line-height: 1;
+}
+.cal__nav:hover { background: var(--surface-2); color: var(--text); }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal__wd {
+  text-align: center; font-size: 11px; font-weight: 600;
+  color: var(--text-muted); padding: 4px 0;
+}
+.cal__day {
+  display: flex; align-items: center; justify-content: center;
+  height: 30px; font-size: 13px; color: var(--text);
+  border-radius: var(--radius-sm);
+}
+.cal__day:not(.cal__day--empty):hover { background: var(--surface-2); }
+.cal__day--today { background: var(--brand); color: var(--brand-contrast); font-weight: 700; }
+.cal__day--empty { visibility: hidden; }
 /* Картинка-ярлычок заполняет плитку и ВСЕГДА квадратная (и на столе, и в доке).
    aspect-ratio держит квадрат, даже если кнопка-контейнер оказалась
    прямоугольной — иначе object-fit обрезал бы иконку под прямоугольник. */
