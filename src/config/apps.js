@@ -69,7 +69,7 @@ export const APPS = [
     name: 'РЭС-менеджмент',
     icon: BarChart3,
     iconSvg: ResmTile,
-    url: import.meta.env.VITE_APP_RESM_URL || 'https://res-management-amvera-ashinoff.amvera.io',
+    url: import.meta.env.VITE_APP_RESM_URL || 'https://res-management-ashinoff.amvera.io',
     roles: ['resm-user', 'admin'],
     badge: true,
     window: { width: 1200, height: 760 },
