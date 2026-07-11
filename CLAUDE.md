@@ -89,6 +89,16 @@ Amvera, Docker-проект. `Dockerfile` собирает Vite и отдаёт 
 2. В Keycloak завести ОДНУ realm-роль доступа `<app>-user` и выдавать её пользователям (+ заполнять email в профиле).
 3. На стороне приложения: принять токен платформы (`platform-auth`), проверить по JWKS, найти своего пользователя **по email**, а роль/права взять из СВОЕЙ БД. То есть Keycloak решает «кто ты» + «пускать ли» (одна роль), приложение — «что тебе можно».
 
+**Добавлено в реестр (`apps.js`):**
+- **РЭС-менеджмент** (`res-management_amvera`, Node/Express) — запись `resm`,
+  роль доступа `resm-user`, `badge:true`, URL из `VITE_APP_RESM_URL`
+  (в `.env.production` пока best-guess `res-management-amvera-ashinoff.amvera.io`
+  — **проверить реальный домен**). Плитка `ResmTile`. Приложение со стороны
+  бэка уже интегрировано (Keycloak SSO по email + `/api/platform/badge`).
+  Осталось: в Keycloak завести realm-роль `resm-user` + выдать пользователям
+  (с email); на Amvera res-management выставить env (`PLATFORM_SSO=true`,
+  `ACCESS_ROLE=resm-user`, `PLATFORM_ORIGIN`, `KEYCLOAK_*`).
+
 **В работе:** СИЗ-контроль (`siz-control`) переводится на тот же паттерн (email + одна роль `siz-user` вместо множества ролей в Keycloak).
 
 ## Иконки, док и бейджи (UI рабочего стола)
