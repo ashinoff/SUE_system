@@ -53,7 +53,7 @@ export default function AppFrame({ win }) {
       src={win.url}
       title={win.title}
       onLoad={sendToken}
-      sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads"
+      sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads allow-modals"
     />
   )
 }
