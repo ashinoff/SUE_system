@@ -70,7 +70,8 @@ export function OprosTile(props) {
       <defs>
         <linearGradient id="oprosGrad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#8b5cf6" />
-          <stop offset="1" stopColor="#5b21b6" />
+          <stop offset="0.55" stopColor="#4c1d95" />
+          <stop offset="1" stopColor="#0b0a12" />
         </linearGradient>
       </defs>
       <rect width="512" height="512" rx="112" fill="url(#oprosGrad)" />
