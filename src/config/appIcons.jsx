@@ -62,6 +62,27 @@ export function AnomalyTile(props) {
   )
 }
 
+// «Опрос ПУ» (аналитика собираемости, ПО «Пирамида») — фиолетовый градиент,
+// белая ступенчатая пирамида (отсылка к «Пирамиде») с сигнальной дугой опроса.
+export function OprosTile(props) {
+  return (
+    <svg viewBox="0 0 512 512" {...props}>
+      <defs>
+        <linearGradient id="oprosGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#8b5cf6" />
+          <stop offset="1" stopColor="#5b21b6" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#oprosGrad)" />
+      <g transform="translate(88 88) scale(14)" fill="none" stroke="#fff" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3.5 20.5 20.5 3.5 20.5Z" />
+        <path d="M7.6 12.2H16.4" />
+        <path d="M5.1 16.4H18.9" />
+      </g>
+    </svg>
+  )
+}
+
 // «СИЗ-контроль» — красная плитка, белый щит с галочкой.
 export function SizTile(props) {
   return (

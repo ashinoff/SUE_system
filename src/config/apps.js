@@ -1,5 +1,5 @@
-import { ShieldCheck, BarChart3, Zap, Activity } from 'lucide-react'
-import { SvetTile, SizTile, ResmTile, AnomalyTile } from './appIcons.jsx'
+import { ShieldCheck, BarChart3, Zap, Activity, Radio } from 'lucide-react'
+import { SvetTile, SizTile, ResmTile, AnomalyTile, OprosTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -75,6 +75,19 @@ export const APPS = [
     iconSvg: AnomalyTile,
     url: import.meta.env.VITE_APP_ANOMALY_URL || 'https://energy-audit-ashinoff.amvera.io/?embed=true',
     roles: ['anomaly-user', 'admin'],
+    badge: false,
+    window: { width: 1280, height: 800 },
+  },
+  {
+    // «Опрос ПУ» — аналитика собираемости приборов учёта (выгрузка из ПО
+    // «Пирамида»). Свой вход логин/пароль + SSO по Keycloak-токену Платформы
+    // (обмен на /api/auth/platform, роль доступа opros-user).
+    id: 'opros',
+    name: 'Опрос ПУ',
+    icon: Radio,
+    iconSvg: OprosTile,
+    url: import.meta.env.VITE_APP_OPROS_URL || 'https://opros-piramida-ashinoff.amvera.io',
+    roles: ['opros-user', 'admin'],
     badge: false,
     window: { width: 1280, height: 800 },
   },
