@@ -18,6 +18,12 @@ export default function Desktop() {
   const openApp = useDesktopStore((s) => s.openApp)
   const wallpaper = useDesktopStore((s) => s.wallpaper)
 
+  // Пока открыто приложение (окно не свёрнуто) — не показываем шапку платформы:
+  // приложение раскрыто на весь экран (модель iOS), а на телефоне шапка иначе
+  // перекрывала бы «светофор» окна и из приложения было бы не выйти. Свернул/
+  // закрыл — окон не осталось, шапка снова появляется на домашнем экране.
+  const hasOpenWindow = windows.some((w) => !w.minimized)
+
   // Применяем выбранные обои к токену --wallpaper (фон стола, входа, boot).
   useEffect(() => {
     const wp =
@@ -28,7 +34,7 @@ export default function Desktop() {
 
   return (
     <div className="desktop">
-      <TopBar />
+      {!hasOpenWindow && <TopBar />}
 
       <main className="desktop__surface">
         <CalendarWidget />
