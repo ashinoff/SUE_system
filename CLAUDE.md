@@ -124,3 +124,24 @@ Amvera, Docker-проект. `Dockerfile` собирает Vite и отдаёт 
 - **Бейджи уведомлений (iOS-стиль).** У приложения с бэкендом — `badge: true` в `apps.js` (заглушки без API — `false`). Хук `useAppBadges.js` опрашивает `GET ${app.url}/api/platform/badge` с `Authorization: Bearer <Keycloak-токен>` при загрузке, каждые 60с и на `visibilitychange`; ответ `{count}`. Любая ошибка/401/таймаут — **тихо**, бейдж не показываем. `Desktop.jsx` рисует красный кружок (`.app-icon__notif`) в углу иконки: `count>0` — показать, `>99` — «99+», `0` — скрыть. **Контракт бейджа:** приложение обязано отдавать `GET /api/platform/badge` → `{"count": N}`, проверяя тот же Keycloak-токен и разрешая CORS для origin платформы (см. `platform-sso` в приложениях).
 
 > Примечание: цвета бейджа (`#ff3b30`, `#fff`) заданы прямо в `app.css`, а не через токены — это осознанное отступление от правила «стили только через tokens.css» для стандартного iOS-красного. При желании — вынести в токен.
+
+## Журнал изменений
+
+- **2026-08-06** — Фикс: после долгого простоя кнопка «Войти» залипала — на деле
+  оболочка зависала на boot-экране «Загрузка…» (`App.jsx` рендерит его пока
+  `ready === false`) и не оживала даже после F5; помогал только инкогнито.
+  Причины и правки:
+  1. `AuthProvider.jsx` — `keycloak.init()` не имел таймаута/`finally`; при
+     зависшем silent-SSO iframe промис не резолвился → `ready` навсегда `false`.
+     Добавлен страховочный `setTimeout` (`INIT_TIMEOUT_MS = 12_000`, форсит
+     `ready=true`) + `.finally(() => setReady(true))`.
+  2. Протухший токен не чистился — добавлен `keycloak.clearToken()` в ветках
+     `else`/`catch` init и в новом `.catch` у `updateToken(30)` (раньше `.catch`
+     не было → unhandled rejection при протухшем refresh-токене).
+  3. В `init()` добавлен `checkLoginIframe: false` — фоновый session-iframe
+     залипал после простоя.
+  4. `nginx.conf` — у `index.html` не было cache-control; добавлен
+     `location = /index.html` с `Cache-Control: no-cache, no-store,
+     must-revalidate`. Протухший закэшированный index.html ссылался на
+     несуществующие `/assets/*` хэши после редеплоя → «работает только в
+     инкогнито». Долгий immutable-кэш `/assets/` не тронут (имена хэшированы).
