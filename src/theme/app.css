@@ -399,3 +399,84 @@ code {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   МОБИЛЬНАЯ ВЕРСИЯ — «домашний экран iPhone»
+   ────────────────────────────────────────────────────────────────
+   Только раскладка через media query — ДЕСКТОПНЫЙ рендер и вся JS-логика
+   не меняются. Модель окон уже iOS-подобная (приложение на весь экран),
+   поэтому на телефоне: springboard-сетка иконок, компактный статус-бар,
+   приложение открывается фуллскрином. Учитываем safe-area (чёлка / домашняя
+   полоска) — для этого в index.html к viewport добавлен viewport-fit=cover.
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Высота с учётом сворачивающейся адресной строки iOS Safari */
+  .desktop { height: 100dvh; }
+
+  /* Верхняя панель → компактный статус-бар, с отступом под «чёлку» */
+  .topbar {
+    height: calc(var(--topbar-height) + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    padding-left: max(var(--space-4), env(safe-area-inset-left));
+    padding-right: max(var(--space-4), env(safe-area-inset-right));
+  }
+  .topbar__right { gap: var(--space-2); }
+  .topbar__user-name { display: none; }   /* имя прячем — на телефоне тесно */
+
+  /* Рабочая область прокручивается: иконок может быть больше, чем влезает */
+  .desktop__surface {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Календарь-виджет прячем — на домашнем экране айфона его нет */
+  .deskcal { display: none; }
+
+  /* Springboard: 4 колонки во всю ширину, иконки сверху вниз */
+  .icon-grid {
+    position: static;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 6px;
+    padding: 22px 14px calc(22px + env(safe-area-inset-bottom));
+    width: 100%;
+  }
+  .app-icon {
+    width: 100%;
+    padding: 4px 2px;
+    gap: 7px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app-icon:hover { background: transparent; }          /* на тач-экране hover не нужен */
+  .app-icon:active .app-icon__badge { transform: scale(0.92); }  /* лёгкое «нажатие», как в iOS */
+  .app-icon__badge {
+    width: 60px; height: 60px;
+    transition: transform .1s;
+  }
+  .app-icon__label {
+    font-size: 12px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;         /* длинные имена — в одну строку с … (как iOS) */
+  }
+  .app-icon__notif {
+    min-width: 22px; height: 22px;
+    padding: 0 6px;
+    font-size: 12px;
+    border-width: 2px;
+    top: -7px; right: -7px;
+  }
+
+  /* Док — над «домашней полоской» */
+  .dock { margin-bottom: calc(var(--space-3) + env(safe-area-inset-bottom)); }
+
+  /* Открытое приложение уже фуллскрин; убираем бессмысленный на телефоне
+     «зелёный» фуллскрин-кружок и увеличиваем тап-таргеты закрыть/свернуть */
+  .app-window__bar { height: 44px; }
+  .traffic__dot { width: 22px; height: 22px; }
+  .traffic__dot--full { display: none; }
+
+  /* Карточка входа — не впритык к краям на узком экране */
+  .login__card { width: min(320px, calc(100vw - 32px)); }
+}
