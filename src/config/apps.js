@@ -65,15 +65,15 @@ export const APPS = [
     window: { width: 1200, height: 760 },
   },
   {
-    // Streamlit-инструмент анализа аномального потребления. Своей авторизации
-    // и бэкенда нет — роль гейтит только показ иконки на рабочем столе, сам
-    // URL открыт (инструмент stateless, данные не сохраняются). ?embed=true —
-    // штатный режим встраивания Streamlit (прячет своё меню/футер в iframe).
+    // «Анализатор ПУ · ТП» (репозиторий Anomaly-analyzer-v2, FastAPI раздаёт
+    // статику). Своей авторизации и бэкенда нет — весь анализ в браузере,
+    // данные никуда не загружаются (stateless). Роль гейтит только показ иконки
+    // на рабочем столе; токен платформы приложению не нужен.
     id: 'anomaly',
     name: 'Анализ потребления',
     icon: Activity,
     iconSvg: AnomalyTile,
-    url: import.meta.env.VITE_APP_ANOMALY_URL || 'https://energy-audit-ashinoff.amvera.io/?embed=true',
+    url: import.meta.env.VITE_APP_ANOMALY_URL || 'https://anomaly-analyzer-v2-ashinoff.amvera.io',
     roles: ['anomaly-user', 'admin'],
     badge: false,
     window: { width: 1280, height: 800 },
