@@ -1,11 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="pgrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b0b1a"/>
-      <stop offset="0.55" stop-color="#1f1b4d"/>
-      <stop offset="1" stop-color="#4f46e5"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="url(#pgrad)"/>
-  <path fill="#ffffff" d="M8 8H24V24H19.5V12.5H12.5V24H8Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="24" fill="#24282d"/>
+  <g fill="#eef0f3">
+    <rect x="14" y="14" width="31" height="31" rx="9"/>
+    <rect x="55" y="14" width="31" height="31" rx="9"/>
+    <rect x="14" y="55" width="31" height="31" rx="9"/>
+  </g>
+  <path d="M77 56 59 75H70.5L65.5 87 84 67.5H72.5Z" fill="#2f5bd8" stroke="#2f5bd8" stroke-width="3" stroke-linejoin="round"/>
 </svg>

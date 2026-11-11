@@ -102,3 +102,29 @@ export function SizTile(props) {
     </svg>
   )
 }
+
+// «Тараканьи бега» — рыже-коричневый градиент, белый таракан (вид сверху)
+// с усами и лапками.
+export function TarakanyTile(props) {
+  return (
+    <svg viewBox="0 0 512 512" {...props}>
+      <defs>
+        <linearGradient id="tarakanyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f59e0b" />
+          <stop offset="1" stopColor="#92400e" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#tarakanyGrad)" />
+      <g transform="translate(88 88) scale(14)" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10.6 5.2C9 3 7.5 2 5.5 1.6M13.4 5.2C15 3 16.5 2 18.5 1.6" />
+        <path d="M8.6 10.5 5 9.2 3.2 6.8M8.4 14 4.4 14.2 2.6 16.4M9 17.4 6 20.6 6.4 22.6" />
+        <path d="M15.4 10.5 19 9.2 20.8 6.8M15.6 14 19.6 14.2 21.4 16.4M15 17.4 18 20.6 17.6 22.6" />
+      </g>
+      <g transform="translate(88 88) scale(14)" fill="#fff">
+        <ellipse cx="12" cy="6.6" rx="2.4" ry="1.9" />
+        <ellipse cx="12" cy="14.6" rx="3.9" ry="6.4" />
+      </g>
+      <path transform="translate(88 88) scale(14)" d="M12 9.2V20.6" stroke="#b45309" strokeWidth="0.8" strokeLinecap="round" />
+    </svg>
+  )
+}

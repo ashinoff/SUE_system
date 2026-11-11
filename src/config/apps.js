@@ -1,5 +1,5 @@
-import { ShieldCheck, BarChart3, Zap, Activity, Radio } from 'lucide-react'
-import { SvetTile, SizTile, ResmTile, AnomalyTile, OprosTile } from './appIcons.jsx'
+import { ShieldCheck, BarChart3, Zap, Activity, Radio, Bug } from 'lucide-react'
+import { SvetTile, SizTile, ResmTile, AnomalyTile, OprosTile, TarakanyTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -88,6 +88,20 @@ export const APPS = [
     iconSvg: OprosTile,
     url: import.meta.env.VITE_APP_OPROS_URL || 'https://opros-piramida-ashinoff.amvera.io',
     roles: ['opros-user', 'admin'],
+    badge: false,
+    window: { width: 1280, height: 800 },
+  },
+  {
+    // «Тараканьи бега» — онлайн-гонка на скорость печати (репозиторий tarakany,
+    // Node/Express + Socket.IO, Amvera waw0). Своей авторизации нет: по токену
+    // платформы игра лишь подставляет имя пользователя в ник (platform-auth +
+    // пинг app-ready). Роль tarakany-user гейтит только показ иконки.
+    id: 'tarakany',
+    name: 'Тараканьи бега',
+    icon: Bug,
+    iconSvg: TarakanyTile,
+    url: import.meta.env.VITE_APP_TARAKANY_URL || 'https://tarakan-race-2-ashinoff.waw0.amvera.tech',
+    roles: ['tarakany-user', 'admin'],
     badge: false,
     window: { width: 1280, height: 800 },
   },
