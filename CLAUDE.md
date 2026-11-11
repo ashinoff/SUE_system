@@ -76,6 +76,8 @@ npm run build      # прод-сборка в dist/
 
 ## Деплой
 
+**Прод — проект Amvera `sue-system-2` (регион waw0, `sue-system-2-ashinoff.waw0.amvera.tech`).** Он НЕ связан с GitHub: у него свой git на Amvera, и пуш в GitHub его не пересобирает. Изменённые файлы заливают в git Amvera (MCP `uploadFiles`) и пересобирают проект. В той копии свой `Dockerfile`: адреса Keycloak (`keycloak-waw-…waw0.amvera.tech`) и приложений заданы там через `ENV VITE_*`. `.env.production` в той копии нет, поэтому `Dockerfile` из GitHub туда не заливать.
+
 Amvera, Docker-проект. `Dockerfile` собирает Vite и отдаёт статику через nginx. `nginx.conf` — SPA-роутинг (любой путь → `index.html`) плюс долгий кэш на `/assets/`. `amvera.yml` — порт 80.
 
 ## Текущее состояние и план
@@ -131,7 +133,8 @@ Amvera, Docker-проект. `Dockerfile` собирает Vite и отдаёт 
   кладём): тёмная плитка, три светлых квадрата-приложения и молния. Мятную молнию
   заменили тёмно-синей. Компонент `components/PlatformLogo.jsx`, цвета — токены
   `--logo-*` в `tokens.css`, тот же рисунок в `public/favicon.svg`. На экране
-  входа (`LoginScreen`) логотип анимирован (`.plogo--animated` в `app.css`):
+  входа (`LoginScreen`) логотип анимирован (`.plogo--animated`, стили — в
+  `src/theme/logo.css`, его подключает сам компонент):
   квадраты появляются по очереди, затем бьёт молния со вспышкой; дальше редкая
   волна по квадратам и мерцание молнии. При `prefers-reduced-motion` анимации нет.
 - **2026-11-11** — Подключены «Тараканьи бега» (`tarakany`, репозиторий
