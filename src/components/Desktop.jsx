@@ -9,6 +9,7 @@ import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
 import AppIcon from './AppIcon.jsx'
 import CalendarWidget from './CalendarWidget.jsx'
+import PlatformLogo from './PlatformLogo.jsx'
 import '../theme/icon-grid.css'
 
 export default function Desktop() {
@@ -38,6 +39,7 @@ export default function Desktop() {
       {!hasOpenWindow && <TopBar />}
 
       <main className="desktop__surface">
+        <PlatformLogo loop className="desk-logo" />
         <CalendarWidget />
         <div className="icon-grid">
           {apps.map((app) => {

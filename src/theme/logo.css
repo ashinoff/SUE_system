@@ -62,7 +62,55 @@
   14% { filter: drop-shadow(0 0 6px var(--logo-bolt-glow)) brightness(1.5); }
 }
 
+/* Рабочий стол: крупный логотип в центре, анимация по кругу (цикл 7 с):
+   квадраты по очереди собираются, бьёт молния со вспышкой, логотип светится,
+   затем всё разбирается и цикл повторяется. Клики не перехватывает. */
+.desk-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(160px, 18vw, 260px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 18px 40px rgba(8, 12, 28, 0.45));
+}
+.plogo--loop .plogo__sq { animation: plogo-loop-sq 7s ease-in-out infinite both; }
+.plogo--loop .plogo__sq--1 { animation-delay: 0s; }
+.plogo--loop .plogo__sq--2 { animation-delay: 0.18s; }
+.plogo--loop .plogo__sq--3 { animation-delay: 0.36s; }
+.plogo--loop .plogo__bolt { animation: plogo-loop-bolt 7s ease-out infinite both; }
+
+@keyframes plogo-loop-sq {
+  0%        { opacity: 0; transform: scale(0.3); }
+  8%        { opacity: 1; transform: scale(1.12); }
+  12%       { transform: scale(1); }
+  48%       { transform: scale(1); }
+  52%       { transform: translateY(-8%) scale(1.06); }
+  56%, 82%  { opacity: 1; transform: scale(1); }
+  92%, 100% { opacity: 0; transform: scale(0.3); }
+}
+@keyframes plogo-loop-bolt {
+  0%, 14%   { opacity: 0; transform: translate(30%, -60%) scale(0.6); }
+  20%       { opacity: 1; transform: none; fill: var(--logo-bolt-flash); stroke: var(--logo-bolt-flash);
+              filter: drop-shadow(0 0 8px var(--logo-bolt-glow)); }
+  24%       { opacity: 0.35; }
+  27%       { opacity: 1; }
+  30%       { opacity: 0.5; }
+  34%       { opacity: 1; filter: drop-shadow(0 0 0 transparent); }
+  60%       { filter: drop-shadow(0 0 7px var(--logo-bolt-glow)) brightness(1.5); }
+  66%, 80%  { opacity: 1; transform: none; filter: drop-shadow(0 0 0 transparent); }
+  90%, 100% { opacity: 0; transform: scale(0.4); }
+}
+
+/* Тесно (иконки слева + календарь справа) и телефон — логотип не показываем. */
+@media (max-width: 1100px) {
+  .desk-logo { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .plogo--loop .plogo__sq,
+  .plogo--loop .plogo__bolt { animation: none; }
   .plogo--animated .plogo__sq,
   .plogo--animated .plogo__bolt { animation: none; }
 }
