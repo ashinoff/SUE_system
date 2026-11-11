@@ -9,6 +9,7 @@ import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
 import AppIcon from './AppIcon.jsx'
 import CalendarWidget from './CalendarWidget.jsx'
+import '../theme/icon-grid.css'
 
 export default function Desktop() {
   const { user } = useAuth()
