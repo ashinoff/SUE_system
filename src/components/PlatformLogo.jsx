@@ -3,14 +3,12 @@ import '../theme/logo.css'
 /* Логотип Платформы: тёмная плитка, три светлых квадрата (приложения)
    и молния. Цвета — токены --logo-* в tokens.css.
    animated — на экране входа: квадраты появляются по очереди, затем «бьёт»
-   молния; дальше квадраты изредка пробегают волной, а молния мерцает.
-   loop — на рабочем столе: та же сборка логотипа по кругу без остановки
-   (собрался → молния → свечение → разобрался → снова). */
-export default function PlatformLogo({ animated = false, loop = false, className = '' }) {
+   молния; дальше квадраты изредка пробегают волной, а молния мерцает. */
+export default function PlatformLogo({ animated = false, className = '' }) {
   return (
     <svg
       viewBox="0 0 100 100"
-      className={`plogo${animated ? ' plogo--animated' : ''}${loop ? ' plogo--loop' : ''} ${className}`}
+      className={`plogo${animated ? ' plogo--animated' : ''} ${className}`}
       role="img"
       aria-label="Платформа"
     >

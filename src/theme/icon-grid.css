@@ -23,3 +23,18 @@
     grid-template-rows: none;
   }
 }
+
+/* Появление иконок по очереди (Desktop.jsx: класс --intro + key, чтобы
+   проигрывать заново при возврате на стол). --i — номер иконки. */
+.icon-grid--intro .app-icon {
+  animation: icon-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+}
+@keyframes icon-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.5); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-grid--intro .app-icon { animation: none; }
+}

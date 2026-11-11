@@ -1,0 +1,81 @@
+/* Экран входа (components/LoginScreen.jsx). Цвета — токены --login-* в
+   tokens.css. Слои снизу вверх: тёмный фон → свет за курсором → сетка,
+   проявляющаяся под светом → молнии (canvas) → карточка. --mx/--my —
+   позиция курсора, их выставляет LoginScreen. */
+.login--fx {
+  --mx: 50vw;
+  --my: 40vh;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--login-bg);
+}
+.login__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(560px circle at var(--mx) var(--my), var(--login-light), transparent 65%);
+}
+.login__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--login-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--login-grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(380px circle at var(--mx) var(--my), #000 0%, transparent 75%);
+  mask-image: radial-gradient(380px circle at var(--mx) var(--my), #000 0%, transparent 75%);
+}
+.login__bolts {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.login--fx .login__card {
+  position: relative;
+  z-index: 2;
+  background: var(--login-card);
+  border: 1px solid var(--login-card-edge);
+  color: var(--login-text);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--login-card-shadow);
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.2s ease-out;
+  animation: login-card-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.login--fx .login__logo { filter: drop-shadow(0 0 22px var(--login-logo-glow)); }
+.login--fx .login__title { color: var(--login-text); letter-spacing: 0.01em; }
+.login--fx .login__subtitle { color: var(--login-text-muted); }
+.login--fx .login__btn {
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: linear-gradient(135deg, var(--login-btn-from), var(--login-btn-to));
+  color: var(--login-btn-text);
+  font-weight: 600;
+  box-shadow: 0 8px 24px var(--login-btn-glow);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+.login--fx .login__btn:hover {
+  background: linear-gradient(135deg, var(--login-btn-from), var(--login-btn-to));
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 36px var(--login-btn-glow);
+}
+.login--fx .login__btn:active { transform: translateY(0); }
+
+@keyframes login-card-in {
+  from { opacity: 0; transform: perspective(900px) translateY(24px) scale(0.96); }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login--fx .login__card { animation: none; transition: none; transform: none; }
+}

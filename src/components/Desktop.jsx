@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth/useAuth.js'
 import { appsForRoles } from '../config/apps.js'
 import { WALLPAPERS, DEFAULT_WALLPAPER } from '../config/wallpapers.js'
@@ -9,7 +9,6 @@ import Dock from './Dock.jsx'
 import WindowFrame from './WindowFrame.jsx'
 import AppIcon from './AppIcon.jsx'
 import CalendarWidget from './CalendarWidget.jsx'
-import PlatformLogo from './PlatformLogo.jsx'
 import '../theme/icon-grid.css'
 
 export default function Desktop() {
@@ -26,6 +25,16 @@ export default function Desktop() {
   // закрыл — окон не осталось, шапка снова появляется на домашнем экране.
   const hasOpenWindow = windows.some((w) => !w.minimized)
 
+  // Иконки «выпрыгивают» по очереди при входе и каждый раз, когда
+  // возвращаемся на стол (все окна закрыты или свёрнуты): смена key
+  // пересоздаёт сетку, и CSS-анимация (.icon-grid--intro) играет заново.
+  const [introKey, setIntroKey] = useState(0)
+  const wasOpen = useRef(false)
+  useEffect(() => {
+    if (wasOpen.current && !hasOpenWindow) setIntroKey((k) => k + 1)
+    wasOpen.current = hasOpenWindow
+  }, [hasOpenWindow])
+
   // Применяем выбранные обои к токену --wallpaper (фон стола, входа, boot).
   useEffect(() => {
     const wp =
@@ -39,15 +48,15 @@ export default function Desktop() {
       {!hasOpenWindow && <TopBar />}
 
       <main className="desktop__surface">
-        <PlatformLogo loop className="desk-logo" />
         <CalendarWidget />
-        <div className="icon-grid">
-          {apps.map((app) => {
+        <div className="icon-grid icon-grid--intro" key={introKey}>
+          {apps.map((app, i) => {
             const count = badges[app.id] || 0
             return (
               <button
                 key={app.id}
                 className="app-icon"
+                style={{ '--i': i }}
                 onClick={() => openApp(app)}
                 title={`Открыть «${app.name}»`}
               >
