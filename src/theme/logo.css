@@ -69,12 +69,19 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(160px, 18vw, 260px);
+  width: clamp(180px, 20vw, 300px);
   height: auto;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  filter: drop-shadow(0 18px 40px rgba(8, 12, 28, 0.45));
 }
+/* Стекло вместо тёмной плитки: логотип — часть обоев, а не наклейка поверх. */
+.desk-logo .plogo__tile {
+  fill: var(--desk-logo-tile);
+  stroke: var(--desk-logo-edge);
+  stroke-width: 0.6;
+}
+.desk-logo .plogo__sq { fill: var(--desk-logo-square); }
+.desk-logo .plogo__bolt { fill: var(--desk-logo-bolt); stroke: var(--desk-logo-bolt); }
 .plogo--loop .plogo__sq { animation: plogo-loop-sq 7s ease-in-out infinite both; }
 .plogo--loop .plogo__sq--1 { animation-delay: 0s; }
 .plogo--loop .plogo__sq--2 { animation-delay: 0.18s; }
