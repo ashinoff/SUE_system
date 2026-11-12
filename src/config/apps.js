@@ -1,5 +1,5 @@
 import { ShieldCheck, BarChart3, Zap, Activity, Radio, Bug } from 'lucide-react'
-import { SvetTile, SizTile, ResmTile, AnomalyTile, OprosTile, TarakanyTile } from './appIcons.jsx'
+import { SvetTile, SizTile, ResmTile, SphereTile, OprosTile, TarakanyTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -65,18 +65,19 @@ export const APPS = [
     window: { width: 1200, height: 760 },
   },
   {
-    // «Анализатор ПУ · ТП» (репозиторий Anomaly-analyzer-v2, FastAPI раздаёт
-    // статику). Своей авторизации и бэкенда нет — весь анализ в браузере,
-    // данные никуда не загружаются (stateless). Роль гейтит только показ иконки
-    // на рабочем столе; токен платформы приложению не нужен.
-    id: 'anomaly',
-    name: 'Анализ потребления',
+    // «ЭнергоСфера» (репозиторий EnergySphere, Amvera Miami, проект tp-approval).
+    // Единое приложение из 4 модулей: анализ потребления (заменил отдельный
+    // «Анализатор ПУ · ТП»), поиск потребителя, инструкция РИРУ, акты ТП.
+    // Вход — токен платформы (platform-auth + app-ready); роль и РЭС
+    // пользователю назначают в админке самой Сферы. sphere-user гейтит иконку.
+    id: 'sphere',
+    name: 'ЭнергоСфера',
     icon: Activity,
-    iconSvg: AnomalyTile,
-    url: import.meta.env.VITE_APP_ANOMALY_URL || 'https://anomaly-analyzer-v2-ashinoff.amvera.io',
-    roles: ['anomaly-user', 'admin'],
+    iconSvg: SphereTile,
+    url: import.meta.env.VITE_APP_SPHERE_URL || 'https://tp-approval-ashinoff.mia0.amvera.tech',
+    roles: ['sphere-user', 'admin'],
     badge: false,
-    window: { width: 1280, height: 800 },
+    window: { width: 1440, height: 900 },
   },
   {
     // «Опрос ПУ» — аналитика собираемости приборов учёта (выгрузка из ПО

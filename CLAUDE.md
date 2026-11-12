@@ -129,6 +129,13 @@ Amvera, Docker-проект. `Dockerfile` собирает Vite и отдаёт 
 
 ## Журнал изменений
 
+- **2026-11-12** — Плитка «ЭнергоСфера» (id `sphere`, роль `sphere-user`) вместо
+  мёртвого «Анализатора ПУ · ТП» (`anomaly`): анализ потребления теперь модуль
+  ЭнергоСферы (репо EnergySphere, Amvera Miami, проект `tp-approval`,
+  `https://tp-approval-ashinoff.mia0.amvera.tech`). `SphereTile` в appIcons.jsx —
+  векторная сфера из 4 лепестков. **Прод sue-system-2 берёт адреса приложений из
+  ENV-строк своего Dockerfile** (не из .env.production) — там `VITE_APP_ANOMALY_URL`
+  заменён на `VITE_APP_SPHERE_URL`. Файлы залиты через uploadFiles + rebuild.
 - **2026-11-12** — Вход без страницы Keycloak. Логин и пароль вводятся в нашей
   форме на экране входа (`LoginScreen.jsx`, стили `theme/login-form.css`, токены
   `--login-field-*`/`--login-error-*`) и уходят в Keycloak в фоне (Direct Access
