@@ -1,0 +1,53 @@
+/* Форма входа на экране LoginScreen (логин/пароль уходят в Keycloak в фоне,
+   его страница не показывается). Цвета — токены --login-field-*, --login-error-*. */
+.login-form {
+  display: grid;
+  gap: var(--space-3);
+  text-align: left;
+}
+.login-form__field {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--login-text-muted);
+}
+.login-form__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--login-field-edge);
+  background: var(--login-field-bg);
+  color: var(--login-text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: normal;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.login-form__input::placeholder { color: var(--login-field-placeholder); }
+.login-form__input:focus {
+  border-color: var(--login-field-focus);
+  box-shadow: 0 0 0 3px var(--login-field-focus-glow);
+}
+/* Автозаполнение браузера не должно красить поле в жёлтый/белый. */
+.login-form__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--login-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--login-card) inset;
+  caret-color: var(--login-text);
+}
+.login-form__error {
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--login-error-edge);
+  background: var(--login-error-bg);
+  color: var(--login-error-text);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.login-form .login__btn { margin-top: var(--space-2); }
+.login-form .login__btn:disabled { cursor: wait; filter: saturate(0.6); opacity: 0.8; transform: none; }

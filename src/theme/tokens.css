@@ -40,6 +40,14 @@
   --login-logo-glow: rgba(91, 132, 255, 0.35);
   --login-bolt-core: #eef3ff;                /* сердцевина молнии */
   --login-bolt-glow: #5b84ff;                /* свечение молнии и вспышка */
+  --login-field-bg: rgba(255, 255, 255, 0.05);   /* поля логина/пароля */
+  --login-field-edge: rgba(140, 165, 255, 0.22);
+  --login-field-focus: rgba(91, 132, 255, 0.85);
+  --login-field-focus-glow: rgba(91, 132, 255, 0.25);
+  --login-field-placeholder: rgba(220, 228, 255, 0.38);
+  --login-error-bg: rgba(255, 92, 110, 0.12);
+  --login-error-edge: rgba(255, 120, 135, 0.35);
+  --login-error-text: #ffc2ca;
 
   /* ─ Поверхности ──────────────────────────────────────────────── */
   --wallpaper:                 /* фон рабочего стола (любой CSS-фон) */
