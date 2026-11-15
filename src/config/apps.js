@@ -1,5 +1,5 @@
-import { ShieldCheck, BarChart3, Zap, Activity, Radio, Bug } from 'lucide-react'
-import { SvetTile, SizTile, ResmTile, SphereTile, OprosTile, TarakanyTile } from './appIcons.jsx'
+import { BarChart3, Zap, Activity, Bug } from 'lucide-react'
+import { SvetTile, ResmTile, SphereTile, TarakanyTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -24,26 +24,6 @@ import { SvetTile, SizTile, ResmTile, SphereTile, OprosTile, TarakanyTile } from
    window — размер окна по умолчанию
    ════════════════════════════════════════════════════════════════ */
 export const APPS = [
-  {
-    id: 'siz',
-    name: 'СИЗ',
-    icon: ShieldCheck,
-    iconSvg: SizTile,
-    url: import.meta.env.VITE_APP_SIZ_URL || 'https://siz-control-ashinoff.amvera.io',
-    roles: ['siz-user', 'admin'],
-    badge: true,
-    window: { width: 1100, height: 720 },
-  },
-  {
-    id: 'reports',
-    name: 'Отчёты',
-    icon: BarChart3,
-    iconUrl: '/apps/reports.png',
-    url: 'about:blank',
-    roles: ['admin'],
-    badge: false,
-    window: { width: 960, height: 640 },
-  },
   {
     id: 'svet',
     name: 'Светлячок',
@@ -78,19 +58,6 @@ export const APPS = [
     roles: ['sphere-user', 'admin'],
     badge: false,
     window: { width: 1440, height: 900 },
-  },
-  {
-    // «Опрос ПУ» — аналитика собираемости приборов учёта (выгрузка из ПО
-    // «Пирамида»). Свой вход логин/пароль + SSO по Keycloak-токену Платформы
-    // (обмен на /api/auth/platform, роль доступа opros-user).
-    id: 'opros',
-    name: 'Опрос ПУ',
-    icon: Radio,
-    iconSvg: OprosTile,
-    url: import.meta.env.VITE_APP_OPROS_URL || 'https://opros-piramida-ashinoff.amvera.io',
-    roles: ['opros-user', 'admin'],
-    badge: false,
-    window: { width: 1280, height: 800 },
   },
   {
     // «Тараканьи бега» — онлайн-гонка на скорость печати (репозиторий tarakany,
