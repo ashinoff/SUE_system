@@ -54,6 +54,9 @@ export default function AppFrame({ win }) {
       title={win.title}
       onLoad={sendToken}
       sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads allow-modals"
+      // Приложения на других доменах: без явного разрешения браузер не даёт им
+      // геолокацию и камеру (ЭнергоСфера — геометка монтёра на объекте).
+      allow="geolocation; camera"
     />
   )
 }
