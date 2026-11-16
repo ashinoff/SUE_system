@@ -12,10 +12,10 @@ import { APPS } from '../config/apps.js'
    Любая ошибка (сеть / 401 / таймаут / не-JSON) — тихо: бейдж просто не
    показываем (count 0), никаких ошибок в UI.
 
-   Обновление: при загрузке, каждые 60 секунд и при возврате фокуса на
+   Обновление: при загрузке, каждые 20 секунд и при возврате фокуса на
    вкладку (visibilitychange). Возвращает объект { [appId]: count }. */
 
-const REFRESH_MS = 60_000
+const REFRESH_MS = 20_000
 const FETCH_TIMEOUT_MS = 8_000
 
 const BADGED_APPS = APPS.filter(

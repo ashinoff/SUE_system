@@ -56,7 +56,7 @@ export const APPS = [
     iconSvg: SphereTile,
     url: import.meta.env.VITE_APP_SPHERE_URL || 'https://tp-approval-ashinoff.mia0.amvera.tech',
     roles: ['sphere-user', 'admin'],
-    badge: false,
+    badge: true, // новые отметки монтёров у инженеров РИРУ (/api/platform/badge)
     window: { width: 1440, height: 900 },
   },
   {
