@@ -68,7 +68,7 @@ export const APPS = [
     name: 'Развитие',
     icon: Sprout,
     iconSvg: RazvitieTile,
-    url: import.meta.env.VITE_APP_TARAKANY_URL || 'https://tarakan-race-2-ashinoff.waw0.amvera.tech',
+    url: import.meta.env.VITE_APP_TARAKANY_URL || 'https://razvitie-ashinoff.msk1.amvera.tech',
     roles: ['tarakany-user', 'admin'],
     badge: false,
     window: { width: 1280, height: 800 },
