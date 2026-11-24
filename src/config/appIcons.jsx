@@ -143,3 +143,17 @@ export function SphereTile(props) {
     </svg>
   )
 }
+
+// «Развитие» — графитовая плитка, росток из трёх листьев цветов разделов
+// (тараканьи бега — жёлтый, тестирование — зелёный, задачи — сиреневый).
+export function RazvitieTile(props) {
+  return (
+    <svg viewBox="0 0 512 512" {...props}>
+      <rect width="512" height="512" rx="112" fill="#23272e" />
+      <path d="M256 420V250" stroke="#f5f4f0" strokeWidth="22" strokeLinecap="round" />
+      <path d="M256 270c-78 0-124-50-124-122 78 0 124 50 124 122z" fill="#f3d99a" />
+      <path d="M256 250c0-82 50-130 128-130 0 82-50 130-128 130z" fill="#b9dccd" />
+      <path d="M256 330c-56 0-92 30-100 76 56 4 92-26 100-76z" fill="#c7cbee" />
+    </svg>
+  )
+}

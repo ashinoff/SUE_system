@@ -1,5 +1,5 @@
-import { BarChart3, Zap, Activity, Bug } from 'lucide-react'
-import { SvetTile, ResmTile, SphereTile, TarakanyTile } from './appIcons.jsx'
+import { BarChart3, Zap, Activity, Sprout } from 'lucide-react'
+import { SvetTile, ResmTile, SphereTile, RazvitieTile } from './appIcons.jsx'
 
 /* ════════════════════════════════════════════════════════════════
    РЕЕСТР ПРИЛОЖЕНИЙ
@@ -60,14 +60,14 @@ export const APPS = [
     window: { width: 1440, height: 900 },
   },
   {
-    // «Тараканьи бега» — онлайн-гонка на скорость печати (репозиторий tarakany,
-    // Node/Express + Socket.IO, Amvera waw0). Своей авторизации нет: по токену
-    // платформы игра лишь подставляет имя пользователя в ник (platform-auth +
-    // пинг app-ready). Роль tarakany-user гейтит только показ иконки.
+    // «Развитие» (бывшие «Тараканьи бега», репозиторий tarakany, Amvera waw0):
+    // разделы Тараканьи бега / Тестирование / Задачи, за успехи — монетки. Вход по
+    // токену платформы (platform-auth + пинг app-ready), сервер проверяет подпись
+    // и берёт ФИО для ника. id и роль tarakany-user прежние — выданные роли работают.
     id: 'tarakany',
-    name: 'Тараканьи бега',
-    icon: Bug,
-    iconSvg: TarakanyTile,
+    name: 'Развитие',
+    icon: Sprout,
+    iconSvg: RazvitieTile,
     url: import.meta.env.VITE_APP_TARAKANY_URL || 'https://tarakan-race-2-ashinoff.waw0.amvera.tech',
     roles: ['tarakany-user', 'admin'],
     badge: false,
