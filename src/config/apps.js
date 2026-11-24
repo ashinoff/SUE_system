@@ -75,8 +75,13 @@ export const APPS = [
   },
 ]
 
-/* Оставляет только те приложения, что доступны пользователю по ролям. */
+/* Все иконки рабочего стола видны всем вошедшим (решение владельца 24.11.2026).
+   Что человеку можно внутри приложения, решает само приложение (свои роли и права).
+   Вернуть показ по ролям Keycloak — SHOW_ALL_APPS = false (роли в APPS не удалены). */
+const SHOW_ALL_APPS = true
+
 export function appsForRoles(userRoles = []) {
+  if (SHOW_ALL_APPS) return APPS
   return APPS.filter(
     (a) => a.roles.length === 0 || a.roles.some((r) => userRoles.includes(r))
   )
