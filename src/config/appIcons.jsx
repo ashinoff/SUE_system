@@ -144,16 +144,44 @@ export function SphereTile(props) {
   )
 }
 
-// «Развитие» — графитовая плитка, росток из трёх листьев цветов разделов
-// (тараканьи бега — жёлтый, тестирование — зелёный, задачи — сиреневый).
+// «Развитие» — чёрная плитка с фиолетовым свечением, живой росток из трёх листьев
+// цветов разделов (бега — персик, тестирование — небо, задачи — лайм): покачивается,
+// рядом подпрыгивает золотая монетка (за успехи — монетки), мерцают искры. Анимация —
+// SVG (SMIL), без JS; как логотип внутри самого «Развития».
 export function RazvitieTile(props) {
   return (
     <svg viewBox="0 0 512 512" {...props}>
-      <rect width="512" height="512" rx="112" fill="#23272e" />
-      <path d="M256 420V250" stroke="#f5f4f0" strokeWidth="22" strokeLinecap="round" />
-      <path d="M256 270c-78 0-124-50-124-122 78 0 124 50 124 122z" fill="#f3d99a" />
-      <path d="M256 250c0-82 50-130 128-130 0 82-50 130-128 130z" fill="#b9dccd" />
-      <path d="M256 330c-56 0-92 30-100 76 56 4 92-26 100-76z" fill="#c7cbee" />
+      <defs>
+        <radialGradient id="razvGlow" cx="50%" cy="62%" r="60%">
+          <stop offset="0" stopColor="#3a2d55" />
+          <stop offset=".55" stopColor="#1b1c24" />
+          <stop offset="1" stopColor="#0d0e12" />
+        </radialGradient>
+        <radialGradient id="razvCoin" cx="35%" cy="35%" r="70%">
+          <stop offset="0" stopColor="#fff1b8" />
+          <stop offset=".6" stopColor="#f2b632" />
+          <stop offset="1" stopColor="#a8700f" />
+        </radialGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#razvGlow)" />
+      <g>
+        <animateTransform attributeName="transform" type="rotate" values="-4 256 432;4 256 432;-4 256 432" dur="5.5s" repeatCount="indefinite" />
+        <path d="M256 432V248" stroke="#f6efe6" strokeWidth="24" strokeLinecap="round" />
+        <path d="M256 272c-88 0-136-56-136-136 88 0 136 56 136 136z" fill="#ff9b6b" />
+        <path d="M256 248c0-88 56-136 136-136 0 88-56 136-136 136z" fill="#6fb8ec" />
+        <path d="M256 352c-64 0-104 32-112 80 64 8 104-24 112-80z" fill="#a3d15a" />
+      </g>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -44;0 0;0 -14;0 0" keyTimes="0;.6;.7;.8;.87;1" dur="3.2s" repeatCount="indefinite" />
+        <circle cx="400" cy="368" r="56" fill="url(#razvCoin)" />
+        <path d="M400 340v56" stroke="#8a5a0b" strokeWidth="12" strokeLinecap="round" />
+      </g>
+      <path d="M112 368l10 22 22 10-22 10-10 22-10-22-22-10 22-10z" fill="#fff4c9">
+        <animate attributeName="opacity" values=".15;1;.15" dur="2.6s" repeatCount="indefinite" />
+      </path>
+      <path d="M376 72l8 16 16 8-16 8-8 16-8-16-16-8 16-8z" fill="#dccbf5">
+        <animate attributeName="opacity" values="1;.15;1" dur="2.6s" repeatCount="indefinite" />
+      </path>
     </svg>
   )
 }
