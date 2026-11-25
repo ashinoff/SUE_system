@@ -145,7 +145,7 @@ export function SphereTile(props) {
 }
 
 // «Развитие» — чёрная плитка с фиолетовым свечением, живой росток из трёх листьев
-// цветов разделов (бега — персик, тестирование — небо, задачи — лайм): покачивается,
+// цветов разделов (бега — изумруд, тестирование — кобальт, задачи — мандарин): покачивается,
 // рядом подпрыгивает золотая монетка (за успехи — монетки), мерцают искры. Анимация —
 // SVG (SMIL), без JS; как логотип внутри самого «Развития».
 export function RazvitieTile(props) {
@@ -167,9 +167,9 @@ export function RazvitieTile(props) {
       <g>
         <animateTransform attributeName="transform" type="rotate" values="-4 256 432;4 256 432;-4 256 432" dur="5.5s" repeatCount="indefinite" />
         <path d="M256 432V248" stroke="#f6efe6" strokeWidth="24" strokeLinecap="round" />
-        <path d="M256 272c-88 0-136-56-136-136 88 0 136 56 136 136z" fill="#ff9b6b" />
-        <path d="M256 248c0-88 56-136 136-136 0 88-56 136-136 136z" fill="#6fb8ec" />
-        <path d="M256 352c-64 0-104 32-112 80 64 8 104-24 112-80z" fill="#a3d15a" />
+        <path d="M256 272c-88 0-136-56-136-136 88 0 136 56 136 136z" fill="#3fd08a" />
+        <path d="M256 248c0-88 56-136 136-136 0 88-56 136-136 136z" fill="#8293ff" />
+        <path d="M256 352c-64 0-104 32-112 80 64 8 104-24 112-80z" fill="#ffaa5c" />
       </g>
       <g>
         <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -44;0 0;0 -14;0 0" keyTimes="0;.6;.7;.8;.87;1" dur="3.2s" repeatCount="indefinite" />
